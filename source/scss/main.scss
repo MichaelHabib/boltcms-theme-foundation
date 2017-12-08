@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01/12/2017, 12:16:16 PM
+    Author     : michael
+*/
+
+
+/*
+General CSS
+*/
+@mixin has-shadow{
+    box-shadow: 0 0 2px 1px $gray-lighter;    
+}
+@mixin has-border{
+    border: 1px solid $gray-lightest;
+
+}
+img{
+    max-width: 100%;
+}
+
+ 
