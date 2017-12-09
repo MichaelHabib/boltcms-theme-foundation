@@ -1,16 +1,44 @@
-<ul class="navbar-nav mr-auto">
-    {% for item in menu %}
-        <li class="nav-item {{ item.submenu is defined ? 'dropdown' }}">
-            <a class="nav-link {{ item.submenu is defined ? 'dropdown-toggle' }}" {{ item.link is defined ? ('href="'~item.link~'"')|raw }} {{ item.submenu is defined ? 
-'data-toggle="dropdown"' }}>{{ item.label }}</a>
+<div class="nav-wrapper ">
+    <div class="title-bar mobile-title-bar" data-responsive-toggle="primay-menu" data-hide-for="medium">
+        <button class="menu-icon" type="button" data-toggle="primay-menu"></button>
+        <div class="title-bar-title">Menu</div>
+    </div>
 
-            {% if item.submenu is defined %}
-                <div class="dropdown-menu">
-                    {% for subitem in item.submenu %}
-                        <a class="dropdown-item" href="{{ subitem.link }}">{{ subitem.label }}</a>
+    <div class="top-bar" id="primay-menu" data-animate="hinge-in-from-top hinge-out-from-top">
+        <div class="row">
+            <div class="top-bar-left">
+                <ul class="horizontal-large medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown">
+                    <li class="menu-text"> <a class="" href="{{ path('homepage') }}">{{ app.config.get('general/sitename') }}</a></li>
+                        {% for item in menu %}
+                        <li class="menu-item {{ item.submenu is defined ? 'has-dropdown' }}">
+                            <a class="{{ item.submenu is defined ? 'dropdown-toggle' }}" {{ item.link is defined ? ('href="'~item.link~'"')|raw }} {{ item.submenu is defined ? 
+'data-toggle="dropdown"' }}>{{ item.label }}</a>
+                            {% if item.submenu is defined %}
+                                {% set submenu = item.submenu %}
+                                <ul class="submenu menu vertical">
+                                    {% for item in submenu %}
+                                        <li class="menu-item {{ item.submenu is defined ? 'has-dropdown' }}">
+                                            <a class="{{ item.submenu is defined ? 'dropdown-toggle' }}" {{ item.link is defined ? ('href="'~item.link~'"')|raw }} {{ item.submenu is defined ? 
+'data-toggle="dropdown"' }}>{{ item.label }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </li>
                     {% endfor %}
-                </div>
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
+
+                </ul>
+            </div>
+            <div class="top-bar-right">
+                <ul class="menu">
+                    <form method="get" action="{{ path('search') }}" class="form-inline">
+                        <input type="text" name="search" class="form-control" placeholder="Search">
+                        <button class="button" type="submit">Search</button>
+                    </form>
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

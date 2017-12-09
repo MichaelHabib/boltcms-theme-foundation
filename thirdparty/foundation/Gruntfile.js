@@ -24,7 +24,7 @@ module.exports = function (grunt) {
             },
             scripts: {
                 files: ['source/js/*.js'],
-                tasks: ['jshint'],
+                tasks: ['copy'],
                 options: {
                     spawn: false
                 }
@@ -38,6 +38,27 @@ module.exports = function (grunt) {
             }
         },
         copy: {
+            my_code: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        filter: 'isFile',
+                        cwr: "./sources/js",
+                        src: ['*'],
+                        dest: 'js/'
+                    },
+                    {
+                        expand: true,
+                        flatten: true,
+                        filter: 'isFile',
+                        cwr: "./bower_components/foundation/js/",
+                        src: ['foundation.js'],
+                        dest: 'thirdparty/foundation/'
+                    }
+                ]
+
+            },
             foundation: {
                 files: [
                     {

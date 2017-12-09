@@ -13,8 +13,8 @@
   ],
   "dependencies": {
     "jquery": "^3.2.1",
-    "foundation": "zurb/bower-foundation",
     "motion-ui": "^1.2.3",
-    "foundation-icon-fonts": "*"
+    "foundation-icon-fonts": "*",
+    "foundation-sites": "^6.4.3"
   }
 }

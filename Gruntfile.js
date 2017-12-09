@@ -24,7 +24,7 @@ module.exports = function (grunt) {
             },
             scripts: {
                 files: ['source/js/*.js'],
-                tasks: ['jshint'],
+                tasks: ['copy'],
                 options: {
                     spawn: false
                 }
@@ -38,13 +38,27 @@ module.exports = function (grunt) {
             }
         },
         copy: {
+            my_code: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        filter: 'isFile',
+                        cwd: "./source/js",
+                        src: ['*'],
+                        dest: 'js/'
+                    }
+                  
+                ]
+
+            },
             foundation: {
                 files: [
                     {
                         expand: true,
                         flatten: true,
                         filter: 'isFile',
-                        cwr: "./bower_components/foundation/css/",
+                        cwd: "./bower_components/foundation/css/",
                         src: ['*'],
                         dest: 'thirdparty/foundation/'
                     },
@@ -52,7 +66,7 @@ module.exports = function (grunt) {
                         expand: true,
                         flatten: true,
                         filter: 'isFile',
-                        cwr: "./bower_components/foundation/js/",
+                        cwd: "./bower_components/foundation/js/",
                         src: ['foundation.js'],
                         dest: 'thirdparty/foundation/'
                     }

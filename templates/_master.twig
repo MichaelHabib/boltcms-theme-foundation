@@ -1,93 +1,47 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {% include 'includes/_master_head.twig' %}
-        <title>
-            {% block title %}
-                {% if record.title is defined %}
-                    {{ record.title|striptags }} |
-                {% endif %}
-                {{ app.config.get('general/sitename') }}  
-                {% if record.title is not defined %}
-                    | {{ app.config.get('general/payoff') }}
-                {% endif %}
-            {% endblock title %}
-        </title>
-    </head>
-    <body>
-        {% if theme.layout is defined %}
-            {% set contenttypeslug = app.request.get('contenttypeslug') %}
-            {% if record is defined and theme.layout[contenttypeslug~'_'~record.slug] is defined %}
-                {% set main_width = theme.layout[contenttypeslug~'_'~record.slug].main.width %}
-                {% set aside_width = theme.layout[contenttypeslug~'_'~record.slug].aside.width  %}
-            {% elseif theme.layout[contenttypeslug] is defined %}
-                {% set main_width = theme.layout[contenttypeslug].main.width %}
-                {% set aside_width = theme.layout[contenttypeslug].aside.width  %}
-            {% else %}
-                {% set main_width = theme.layout['defaults'].main.width %}
-                {% set aside_width = theme.layout['defaults'].aside.width  %}
-            {% endif %}
+{% extends 'includes/_master_template.twig' %}
 
-            {#            {% set recordslug = record.slug %}#}
-            {#            {{ dump(record.contenttype.singular_slug) }}#}
-            {#            {{ dump(attribute(theme.layout,record_type_slug~"_"~record.slug) ) }}#}
+{% block body %}
+
+    {# 
+    set main_width and aside_width values 
+    #}
+    {% if theme.layout is defined %}
+        {% set contenttypeslug = app.request.get('contenttypeslug') %}
+        {% if record is defined and theme.layout[contenttypeslug~'_'~record.slug] is defined %}
+            {% set main_width = theme.layout[contenttypeslug~'_'~record.slug].main.width %}
+            {% set aside_width = theme.layout[contenttypeslug~'_'~record.slug].aside.width  %}
+        {% elseif theme.layout[contenttypeslug] is defined %}
+            {% set main_width = theme.layout[contenttypeslug].main.width %}
+            {% set aside_width = theme.layout[contenttypeslug].aside.width  %}
+        {% else %}
+            {% set main_width = theme.layout['defaults'].main.width %}
+            {% set aside_width = theme.layout['defaults'].aside.width  %}
         {% endif %}
-<ul class="vertical medium-horizontal menu">
-  <li><a href="#0"><i class="fi-list"></i> <span>One</span></a></li>
-  <li><a href="#0"><i class="fi-list"></i> <span>Two</span></a></li>
-  <li><a href="#0"><i class="fi-list"></i> <span>Three</span></a></li>
-  <li><a href="#0"><i class="fi-list"></i> <span>Four</span></a></li>
-</ul>
-        {% include 'includes/_master_header.twig' %}
+    {% endif %}
 
-        <div class="container page-wrapper">
-            <div class="row page-layout-row">
-                <div class="large-{{ main_width }} columns">
-                    {% block main %}
-                        {% if record is defined %}
-                            <article> 
-                                {{ fields(record=record, template='includes/_sub_fields.twig') }}
-                                {% include 'includes/_record_footer.twig' with {'record': record} %}
-                            </article>
+    {#
+    set templates 
+    #}
+    {% set header_template = ['includes/_page_header_simple.twig'] %}
+    {% set main_template = ['includes/_main_right_aside.twig'] %}
+    {% set footer_template = ['includes/_page_footer_simple.twig'] %}
 
-                        {% elseif records is defined %}
-                            {% for record in records %}
-                                {% include 'includes/_listing_item.twig' with {'record': record} %}
-                                {% if not loop.last %}
-                                    <hr />
-                                {% endif %}
-                            {% else %}
-                                <h2>{{ __('general.phrase.no-content-found') }}</h2>
-                                <p>Unfortunately, no content could be found.</p>
-                            {% endfor %}
-
-                        {% endif %}
-                    {% endblock %}
-                </div>
-
-                {% if aside_width is defined and aside_width  != 0%}
-                    <div class="large-{{ aside_width }} columns">
-
-                        {% include 'includes/_aside.twig' %}
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-
-        {% include 'includes/_master_footer.twig' %}
+    {#
+    render the body block from parent template 
+    #}
+    {{ parent() }}
 
 
-        {% if record is defined and theme.dump.record.all is defined  %} 
-            <h2>dump(record)</h2>
-            {{ dump(record) }}
-        {% endif %}
-        {% if theme.dump.app.all is defined  %} 
-            <h2>dump(app.config)) </h2>
-            {{ dump(app.config) }}
-        {% elseif theme.dump.app.config is defined  %}
-            <h2>dump(app.config)) </h2>
-            {{ dump(app.config) }}
-        {% endif %}
+    {% if record is defined and theme.dump.record.all is defined  %} 
+        <h2>dump(record)</h2>
+        {{ dump(record) }}
+    {% endif %}
+    {% if theme.dump.app.all is defined  %} 
+        <h2>dump(app.config)) </h2>
+        {{ dump(app.config) }}
+    {% elseif theme.dump.app.config is defined  %}
+        <h2>dump(app.config)) </h2>
+        {{ dump(app.config) }}
+    {% endif %}
 
-    </body>
-</html>
+{% endblock body %}
