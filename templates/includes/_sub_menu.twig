@@ -30,12 +30,11 @@
                 </ul>
             </div>
             <div class="top-bar-right">
-                <ul class="menu">
-                    <form method="get" action="{{ path('search') }}" class="form-inline">
-                        <input type="text" name="search" class="form-control" placeholder="Search">
-                        <button class="button" type="submit">Search</button>
-                    </form>
-                   
+                <form method="get" action="{{ path('search') }}" class="form-inline">
+                    <ul class="menu">
+                        <li><input type="text" name="search" class="form-control" placeholder="Search"></li>
+                        <li><button class="button" type="submit">Search</button></li>
+                </form>
                 </ul>
             </div>
         </div>

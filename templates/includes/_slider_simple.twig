@@ -1,0 +1,43 @@
+{#
+- Usage
+    {% import 'includes/_slider_simple.twig' as slidermacro %}
+    {{ slidermacro.slider(record.imagelist) }}
+
+#}
+{% macro slider(slides,options) %}
+    {% if options.showtitle is not defined %}
+        {% set options['showtitle'] = true %}
+    {% endif  %}
+
+
+    <div class="orbit" role="region" aria-label="" data-orbit>
+        <ul class="orbit-container">
+            <button class="orbit-previous" aria-label="previous"><span class="show-for-sr">Previous Slide</span>&#9664;</button>
+            <button class="orbit-next" aria-label="next"><span class="show-for-sr">Next Slide</span>&#9654;</button>
+            {% for slide in slides %}
+                <li class="orbit-slide slide-{{ loop.index }} {{ loop.index == 1 ? 'is-active' }}">
+                    <figure class="orbit-figure">
+                        <img class="orbit-image" src="{{ slide | image(1200,400) }} " alt="{{ slide.title }}">
+                        {% if slide.title is defined and options.showtitle == true %}
+                            <figcaption class="orbit-caption">
+                                <strong>{{ slide.title }}</strong>
+                            </figcaption>
+                        {% endif %}
+                    </figure>
+                </li>
+            {% endfor %}
+        </ul>
+        <nav class="orbit-bullets">
+            {% for slide in slides %}
+                <button class="{{ loop.index == 1 ? 'is-active' }}" data-slide="{{ loop.index0 }}"></button>
+            {% endfor %}
+            {#
+                        <button class="is-active" data-slide="0">
+                            <span class="show-for-sr">First slide details.</span>
+                            <span class="show-for-sr">Current Slide</span>
+                        </button>
+            #}
+        </nav>
+    </div>
+
+{% endmacro %}

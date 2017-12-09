@@ -1,6 +1,9 @@
 {% extends 'includes/_master_template.twig' %}
 
 {% block body %}
+{#    {% include ['includes/_macros.twig'] %}#}
+    {% import 'includes/_macros.twig' as macros %}
+    
 
     {# 
     set main_width and aside_width values 

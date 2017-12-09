@@ -1,6 +1,8 @@
 {#
 Main section with right aside 
 #}
+{# THIS IS A TEMP COPY OF ORIGINAL TEMPLATE WITH THE SAME NAME.
+LEFT HERE FOR NOW AS A BACKUP #}
 
 <div class="container page-wrapper">
     <div class="row page-layout-row">
@@ -9,28 +11,7 @@ Main section with right aside
                 {% block main %}
                     {% if record is defined %}
                         <article> 
-                            {#                            {{ fields(record=record, template='includes/_sub_fields.twig') }}#}
-                            {% if record.title is defined %}
-                                <h1 class="page-title">{{ record.title }}</h1>
-                            {% endif %}
-
-                            {% if record.image is defined %}
-                                <img class="thumbnail" src="{{ record.image | image(600,400) }}" />
-                            {% endif %}
-
-                            {% if record.imagelist is defined %}
-                                {% import 'includes/_slider_simple.twig' as slidermacro %}
-                                {{ slidermacro.slider(record.imagelist,false) }}
-                            {% endif %}
-
-                            {% if record.title is defined %}
-                            {% endif %}
-
-                            {% if record.title is defined %}
-                            {% endif %}
-
-                            {% set fieldsss = fields(record=record, template='includes/_sub_fields.twig') %}
-                            {#                            {{ fieldsss|raw }}#}
+                            {{ fields(record=record, template='includes/_sub_fields.twig') }}
                             {% include 'includes/_record_footer.twig' with {'record': record} %}
                         </article>
 

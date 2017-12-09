@@ -1,0 +1,16 @@
+{#
+- Usage example:
+    {% import 'includes/_macros.twig' as macros %}
+#}
+
+
+
+{# Create image placeholder using placeholder.com
+- Usage example:
+    {{ macros.placeholder('300x300') }}
+    
+  #}
+{% macro placeholder(options) %}
+    <img src="http://via.placeholder.com/{{ options }}"/>
+{% endmacro placeholder %}
+
