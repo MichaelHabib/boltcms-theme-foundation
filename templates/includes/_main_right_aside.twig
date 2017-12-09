@@ -1,0 +1,40 @@
+{#
+Main section with right aside 
+#}
+
+<div class="container page-wrapper">
+    <div class="row page-layout-row">
+        <div class="large-{{ main_width }} columns">
+            <main>
+                {% block main %}
+                    {% if record is defined %}
+                        <article> 
+                            {{ fields(record=record, template='includes/_sub_fields.twig') }}
+                            {% include 'includes/_record_footer.twig' with {'record': record} %}
+                        </article>
+
+                    {% elseif records is defined %}
+                        {% for record in records %}
+                            {% include 'includes/_listing_item.twig' with {'record': record} %}
+                            {% if not loop.last %}
+                                <hr />
+                            {% endif %}
+                        {% else %}
+                            <h2>{{ __('general.phrase.no-content-found') }}</h2>
+                            <p>Unfortunately, no content could be found.</p>
+                        {% endfor %}
+
+                    {% endif %}
+                {% endblock %}
+            </main>
+        </div>
+
+        {% if aside_width is defined and aside_width  != 0%}
+            <div class="large-{{ aside_width }} columns">
+                <aside class="main-aside right">
+                    {% include 'includes/_aside.twig' %}
+                </aside>
+            </div>
+        {% endif %}
+    </div>
+</div>

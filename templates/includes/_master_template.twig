@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include 'includes/_master_head.twig' %}
+        <title>
+            {% block title %}
+                {% if record.title is defined %}
+                    {{ record.title|striptags }} |
+                {% endif %}
+                {{ app.config.get('general/sitename') }}  
+                {% if record.title is not defined %}
+                    | {{ app.config.get('general/payoff') }}
+                {% endif %}
+            {% endblock title %}
+        </title>
+    </head>
+    <body>
+        {# 
+        - Required variables
+        -- main_width = int (1-12)
+        -- aside_width = int (1-12)
+        -- header_template = string or array
+        -- main_template = string or array
+        -- footer_template = string or array
+        
+        
+        #}
+        {% block body %}         
+            
+            {% include header_template  %}
+
+            {% include main_template  with {'main_width': main_width, 'aside_width': aside_width} %}
+
+            {% include footer_template  %}
+
+        {% endblock body %}
+    </body>
+</html>
