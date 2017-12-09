@@ -1,0 +1,50 @@
+{
+  "name": "zurb-foundation-6-prebuilt",
+  "version": "6.3.1",
+  "description": "Get started quickly with the most advanced responsive front-end framework in the world.",
+  "keywords": [
+    "zurb",
+    "zurb-foundation",
+    "zurb-6"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dragthor/zurb-foundation-6-prebuilt.git"
+  },
+  "author": {
+    "name": "Kris Krause"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dragthor/zurb-foundation-6-prebuilt/issues"
+  },
+  "gitHead": "0fb44e164bce115f9c71b95da85e144e5141d604",
+  "homepage": "https://github.com/dragthor/zurb-foundation-6-prebuilt#readme",
+  "_id": "zurb-foundation-6-prebuilt@6.3.1",
+  "scripts": {},
+  "_shasum": "9443ab9b3e7aafd81e580d3bf92be53f50535950",
+  "_from": "zurb-foundation-6-prebuilt@^6.3.1",
+  "_npmVersion": "3.10.10",
+  "_nodeVersion": "6.9.5",
+  "_npmUser": {
+    "name": "dragthor",
+    "email": "kris.krause@gmail.com"
+  },
+  "dist": {
+    "shasum": "9443ab9b3e7aafd81e580d3bf92be53f50535950",
+    "tarball": "https://registry.npmjs.org/zurb-foundation-6-prebuilt/-/zurb-foundation-6-prebuilt-6.3.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "dragthor",
+      "email": "kris.krause@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/zurb-foundation-6-prebuilt-6.3.1.tgz_1489088443886_0.3700386583805084"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/zurb-foundation-6-prebuilt/-/zurb-foundation-6-prebuilt-6.3.1.tgz",
+  "readme": "ERROR: No README data found!"
+}

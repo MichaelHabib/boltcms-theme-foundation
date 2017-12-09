@@ -32,12 +32,17 @@
             {#            {{ dump(record.contenttype.singular_slug) }}#}
             {#            {{ dump(attribute(theme.layout,record_type_slug~"_"~record.slug) ) }}#}
         {% endif %}
-
+<ul class="vertical medium-horizontal menu">
+  <li><a href="#0"><i class="fi-list"></i> <span>One</span></a></li>
+  <li><a href="#0"><i class="fi-list"></i> <span>Two</span></a></li>
+  <li><a href="#0"><i class="fi-list"></i> <span>Three</span></a></li>
+  <li><a href="#0"><i class="fi-list"></i> <span>Four</span></a></li>
+</ul>
         {% include 'includes/_master_header.twig' %}
 
         <div class="container page-wrapper">
             <div class="row page-layout-row">
-                <div class="col-md-{{ main_width }}">
+                <div class="large-{{ main_width }} columns">
                     {% block main %}
                         {% if record is defined %}
                             <article> 
@@ -61,7 +66,7 @@
                 </div>
 
                 {% if aside_width is defined and aside_width  != 0%}
-                    <div class="col-md-{{ aside_width }}">
+                    <div class="large-{{ aside_width }} columns">
 
                         {% include 'includes/_aside.twig' %}
                     </div>
