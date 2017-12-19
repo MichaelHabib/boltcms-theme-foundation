@@ -1,0 +1,71 @@
+{#
+Main section with right aside 
+#}
+
+<div class="container page-wrapper">
+    <div class="row page-layout-row">
+        <div class="large-{{ main_width }} columns">
+            <main>
+                {% block main %}
+                    {% if record is defined %}
+                        <article>      
+                            {% if record.title is defined %}
+                                <h1 class="page-title">{{ record.title }}</h1>
+                            {% endif %}
+
+                            {% if record.image is defined %}
+                                <img class="thumbnail" src="{{ record.image | image(1200,400) }}" />
+                            {% endif %}
+
+                            {% if record.content is defined %}
+                                {{ record.content |raw}}
+                            {% endif %}
+
+                            {% if record.imagelist is defined %}
+                                {% from 'includes/_slider_simple.twig' import slider as slider %}
+                                {% set slideroptions = {
+                                    'showtitle': true,
+                                    'shownav': true,
+                                    'navtype': 'thumbnails',   
+
+                                } %}
+                                {{ slider(record.imagelist,slideroptions) }}
+                            {% endif %}
+
+
+
+                            {% if record.title is defined %}
+                            {% endif %}
+
+                            {% set fieldsss = fields(record=record, template='includes/_sub_fields.twig') %}
+                            {#                            {{ fieldsss|raw }}#}
+                            {% include 'includes/_record_footer.twig' with {'record': record} %}
+                        </article>
+
+                    {% elseif records is defined %}
+                        {% for record in records %}
+                            {% include 'includes/_listing_item.twig' with {'record': record} %}
+                            {% if not loop.last %}
+                                <hr />
+                            {% endif %}
+                        {% else %}
+                            <h2>{{ __('general.phrase.no-content-found') }}</h2>
+                            <p>Unfortunately, no content could be found.</p>
+                        {% endfor %}
+
+                    {% endif %}
+                {% endblock %}
+            </main>
+        </div>
+
+        {% if aside_width is defined and aside_width  != 0%}
+            <div class="large-{{ aside_width }} columns">
+                <aside class="main-aside right">
+                    {% block aside %}
+                        {% include 'includes/_aside.twig' %}
+                    {% endblock %}
+                </aside>
+            </div>
+        {% endif %}
+    </div>
+</div>

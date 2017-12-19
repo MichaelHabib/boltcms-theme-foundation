@@ -13,4 +13,10 @@ General CSS
 img {
   max-width: 100%; }
 
+#primary-navigation-wrapper {
+  background: #aaa; }
+  #primary-navigation-wrapper .top-bar ul,
+  #primary-navigation-wrapper .top-bar {
+    background: none; }
+
 /*# sourceMappingURL=main.css.map */

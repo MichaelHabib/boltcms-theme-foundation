@@ -6,13 +6,26 @@ template_directory: templates/
 homepage_template: index.twig
 record_template: record.twig
 listing_template: listing.twig
-search_results_template: listing.twig
+search_results_template: search.twig
 maintenance_template: maintenance.twig
-notfound: 404.twig
+notfound: notfound.twig
 
+templatefields:
+    index.twig: # Our homepage template
+        templatefields_section_1_heading:
+            type: text
+        templatefields_section_1_body:
+            type: html
+        templatefields_section_2_heading:
+            type: text
+        templatefields_section_2_body:
+            type: html
+        templatefields_footer_image:
+            type: image
 ## Layout Config
 #Widths are defined in terms of Bootstrap's grid system.
 #USAGE:
+# code looks for contenttype_singularslug_recordslug, contenttype_singularslug, contenttype_slug, default
 #layout:
 #    [default, contenttypeslug, contententtypeslug_contenetslug]:
 #        main:
@@ -23,28 +36,23 @@ notfound: 404.twig
 layout:
   defaults:
     main:
-        width: 8
+        width: auto
     aside:
         width: 4
   page:
     main:
-        width: 8
+        width: auto
     aside:
-        width: 4
+        width: 3
   page_home:
     main:
-        width: 6
+        width: auto
     aside:
-        width: 6
+        width: 0
     
     
-## Debug Config
-dump:
-    record: 
-#        all: true
-    app:
-#        all: true
-#        config: true
-
+## Show dump pupup bottons at the bottom of the page
+dumppopups: true
+   
 
 

@@ -1,0 +1,71 @@
+
+{% set sections = ['contentblocks','section_a','section_b'] %}
+{% macro blurb(item) %}
+    <div class="card">
+        <div class="card-body">
+            <div  class="card-divider card-title">
+                <h2>
+                    <a href="{{ item.link }}">{{ item.title }}</a>
+                </h2>
+            </div>
+            {% if item.image %}
+                <a href="{{ item.link }}" class="card-img-top"><img class=""  src="{{ item.image | image(980,320 )}}" /></a>
+                {% endif %}
+            <div class="card-section card-text">{{ item.content |raw }}</div>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro gallery(item) %}
+
+{% endmacro %}
+
+{% if record['section_a'] is defined %}
+    {% set section = record['section_a'] %}
+    {{ dump("section name:"~section.name) }}
+    <section class="{{ section.name~"_section" }} grid-container" >
+        <div class="grid-x grid-padding-x small-up-1 medium-up-2 large-up-2">
+        {% for group in section %}
+            <div class="{{ group.block ~ "_block" }} cell">
+                {% if group.block == 'blurb' %}
+                    {{ _self.blurb(group) }}
+                {% endif %}
+            </div> <!-- end {{ group.block ~ "_block" }} -->
+        {% endfor %}
+        </div>
+    </section>
+{% endif %}
+
+{% if record['section_b'] is defined %}
+    {% set section = record['section_b'] %}
+    {{ dump("section name:"~section.name) }}
+    <section class="{{ section.name~"_section" }} row" >
+        {% for group in section %}
+            <div class="{{ group.block ~ "_block" }} col-sm-12">
+                {% if group.block == 'gallery' %}
+                    {% from 'includes/galleries/_gallery_simple.twig' import gallery as gallery %}
+                    {% set galleryoptions = {
+                                    'showtitle': true,
+                                    'shownav': true,
+                                    'navtype': 'thumbnails',   
+                                } %}
+                    {{ gallery(group.images,galleryoptions) }}
+                {% endif %}
+            </div> <!-- end {{ group.block ~ "_block" }} -->
+        {% endfor %}
+    </section>
+{% endif %}
+
+
+
+{% for sectionname in sections %}
+    {% if record[sectionname] is defined %} 
+        <section class="{{ sectionname~"_section" }} row" >
+            {% for group in record[sectionname] %}
+
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endfor %}
+

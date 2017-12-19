@@ -1,0 +1,50 @@
+<div id='primary-navigation-wrapper' class="nav-wrapper " data-sticky-container>
+    <div class="sticky" data-sticky data-options="marginTop:0;anchor:stickhere;stickyOn:small" style="width:100%">
+
+        <div class="title-bar mobile-title-bar" data-responsive-toggle="primay-menu" data-hide-for="medium" style='z-index:9999999999999999'>
+            <div class="title-bar-left"> 
+                <button class="menu-icon" type="button" data-toggle="primay-menu"></button>
+                <div class="title-bar-title">Menu</div>
+            </div>
+            <div class="title-bar-right"><!-- Content --></div>
+
+        </div>
+
+        <div class="top-bar" id="primay-menu" data-animate="slide-in-down slide-out-up" >
+            <div class="row">
+                <div class="top-bar-left">
+                    <ul class="horizontal-large medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown">
+                        <li class="menu-text"> <a class="" href="{{ path('homepage') }}">{{ app.config.get('general/sitename') }}</a></li>
+                            {% for item in menu %}
+                            <li class="menu-item {{ item.submenu is defined ? 'has-dropdown' }}">
+                                <a class="{{ item.submenu is defined ? 'dropdown-toggle' }}" {{ item.link is defined ? ('href="'~item.link~'"')|raw }} {{ item.submenu is defined ? 
+'data-toggle="dropdown"' }}>{{ item.label }}</a>
+                                {% if item.submenu is defined %}
+                                    {% set submenu = item.submenu %}
+                                    <ul class="submenu menu vertical">
+                                        {% for item in submenu %}
+                                            <li class="menu-item {{ item.submenu is defined ? 'has-dropdown' }}">
+                                                <a class="{{ item.submenu is defined ? 'dropdown-toggle' }}" {{ item.link is defined ? ('href="'~item.link~'"')|raw }} {{ item.submenu is defined ? 
+'data-toggle="dropdown"' }}>{{ item.label }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <form method="get" action="{{ path('search') }}" class="form-inline">
+                        <ul class="menu">
+                            <li><input type="text" name="search" class="form-control" placeholder="Search"></li>
+                            <li><button class="button" type="submit">Search</button></li>
+                    </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

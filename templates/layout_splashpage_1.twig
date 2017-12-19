@@ -1,0 +1,64 @@
+{% extends '/_master.twig' %}
+{% block body %}
+
+    {% embed 'includes/_main_xgrid.twig' %}
+        {% set aside_width = 0 %}
+        {% block main %} 
+            {#            {{ parent() }}#}
+            {% if record.title is defined %}
+                {#                <h1 class="page-title">{{ record.title }}</h1>#}
+            {% endif %}
+
+
+            {% if record.imagelist is defined %}
+                <section class='carousel'>
+                    {% from 'includes/carousels/_carousel_simple.twig' import carousel as carousel %}
+
+                    {% set carouseloptions = {
+                                    'showtitle': true,
+                                    'shownav': true,
+                                    'navtype': 'thumbnails',   
+                                } %}
+                    {{ carousel(record.imagelist,carouseloptions) }}
+                </section>
+            {% endif %}
+
+            {% if record.image is defined %}
+                {#                <img class="thumbnail" src="{{ record.image | image(1200,400) }}" />#}
+            {% endif %}
+
+            {% if record.content is defined %}
+                <section class='grid-container content'>
+                    {{ record.content |raw}}
+                </section>
+            {% endif %}
+            
+            {% if record.imagelist is defined %}
+                <section class='grid-container gallery '>
+                    {% from 'includes/galleries/_gallery_simple.twig' import gallery as gallery %}
+                    {% set galleryoptions = {
+                                    'showtitle': true,
+                                    'shownav': true,
+                                    'navtype': 'thumbnails',   
+
+                                } %}
+                    {{ gallery(record.imagelist,galleryoptions) }}
+                </section>
+            {% endif %}
+            
+            {% set fieldsss = fields(record=record, template='includes/_sub_fields.twig') %}
+            {% include 'includes/_record_footer.twig' with {'record': record} %}
+
+
+            {% if record.contentblocks is defined %}
+                {% include 'includes/_blocks_templates.twig' with {'record': record} %}
+            {% endif %}
+
+
+        {% endblock main %}
+
+        {% block aside %}         
+            {{ parent() }}
+        {% endblock aside %}
+    {% endembed %}
+{% endblock body%}

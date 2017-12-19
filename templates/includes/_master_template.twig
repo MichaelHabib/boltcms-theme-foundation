@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        {% include 'includes/_master_head.twig' %}
+    <html class="no-js" lang="en" dir="ltr">
+        {% block headincludes %}
+            {% include 'includes/_master_head.twig' %}
+        {% endblock %}
+
         <title>
             {% block title %}
-                {% if record.title is defined %}
-                    {{ record.title|striptags }} |
-                {% endif %}
-                {{ app.config.get('general/sitename') }}  
-                {% if record.title is not defined %}
-                    | {{ app.config.get('general/payoff') }}
-                {% endif %}
             {% endblock title %}
         </title>
     </head>
-    <body>
+    <body class="{{ body_classes }} ">
         {# 
-        - Required variables
+        - Required variables to be set in inheriting template 
         -- main_width = int (1-12)
         -- aside_width = int (1-12)
         -- header_template = string or array
@@ -24,14 +20,31 @@
         -- footer_template = string or array
 
         #}
-        {% block body %}         
-            
-            {% include header_template  %}
+        {% set required_vars = [
+            'main_width',
+            'aside_width',
+            'header_template',
+            'main_template',
+            'footer_template',
+        ] %}
+        {% for var in required_vars %}
+            {% if _context[var]  is not defined %}
+                {{ dump(var ~ ' is required in inheriting template') }}
+            {% endif %}
+        {% endfor %}
 
-            {% include main_template  with {'main_width': main_width, 'aside_width': aside_width} %}
 
-            {% include footer_template  %}
+        {% block header %}         
+        {% endblock header %}
 
-        {% endblock body %}
+        {% block body %}
+        {% endblock body%}
+
+        {% block footer %}         
+        {% endblock footer %}
+
+        {% block footerincludes %}
+
+        {% endblock footerincludes %}
     </body>
 </html>

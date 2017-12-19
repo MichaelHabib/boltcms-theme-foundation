@@ -1,18 +1,22 @@
 <div class="card">
     {#    <div class="card-header">#}
     {#    </div>#}
-    <a href="{{ record.link }}" class="card-img-top"><img class=""  src="{{ record.image | image(480,320 )}}" /></a>
-        {#    <img class="card-img-top"  src="{{ image(record.image) }}" />#}
+    {#    <img class="card-img-top"  src="{{ image(record.image) }}" />#}
     <div class="card-body">
-        <h2 class="card-title"><a href="{{ record.link }}">{{ record.title }}</a></h2>
-            {% if record.image %}
+        <div  class="card-divider card-title">
+            <h2>
+                <a href="{{ record.link }}">{{ record.title }}</a>
+            </h2>
+        </div>
+        {% if record.image %}
+            <a href="{{ record.link }}" class="card-img-top"><img class=""  src="{{ record.image | image(980,320 )}}" /></a>
             {% endif %}
-        <div class="card-text">{{ record.excerpt(500) }}</div>
-
+        <div class="card-section card-text">{{ record.excerpt(500) }}</div>
     </div>
 
+
     <footer class="card-footer record-footer">
-        <div class="">
+        <div class="card-section">
             {% if record.editlink() %}
                 <a href="{{ record.editlink() }}" class="btn btn-primary">Edit this entry</a>
 

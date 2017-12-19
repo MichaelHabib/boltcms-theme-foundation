@@ -1,0 +1,62 @@
+{#
+- Usage:
+    {% from 'includes/_slider_simple.twig' import slider as slider %}
+    {% set slideroptions = {
+        'showtitle': true | false,
+        'shownav': true | false,
+        'navtype': thumbnails (defaults to bullets if undefined), 
+    } %}
+    {{ slider(record.imagelist,slideroptions) }}
+
+#}
+{% macro gallery(images,options) %}
+    {% if options is not iterable %}
+        {% set options = {} %}
+    {% else %}
+    {% endif  %}
+
+    {% if options.showtitle is not defined %}
+        {% set options = options| merge({'showtitle': true}) %}
+    {% endif  %}
+
+    {% if options.shownav is not defined %}
+        {% set options = options| merge({'shownav': true}) %}
+    {% endif  %}
+
+    {% if options.navtype is not defined %}
+        {% set options = options| merge({'navtype': 'bullets'}) %}
+    {% endif  %}
+    <div class='gallery gallery-simple'>
+        <div class="grid-x grid-padding-x small-up-1 medium-up-4 large-up-4">
+            {% for image in images %}
+                <div class="cell image-{{ loop.index }} "> 
+                    <figure class="">
+                        <img class="" src="{{ image | image(1200,400) }} " alt="{{ image.title }}">
+                        {% if image.title is defined and options.showtitle == true %}
+                            <figcaption class="caption">
+                                <strong>{{ image.title }}</strong>
+                            </figcaption>
+                        {% endif %}
+                    </figure>
+                </div>
+
+            {% endfor %}
+        </div>
+
+        {% if options.shownav == true %}
+            <div class="orbit-nav-wrapper orbit-bullets-wrapper">
+                <nav class="orbit-nav orbit-bullets">
+                    {% for image in images %}
+                        <button class="{{ loop.index == 1 ? 'is-active' }}" data-slide="{{ loop.index0 }}">
+                            {% if options.navtype == 'thumbnails' %}
+                                <img class="orbit-image" src="{{ image | image(40,40) }} " alt="{{ image.title }}"> 
+                            {% endif %}
+                        </button>
+                    {% endfor %}
+                </nav>
+            </div
+        </div>
+    {% endif %}
+</div>
+
+{% endmacro %}

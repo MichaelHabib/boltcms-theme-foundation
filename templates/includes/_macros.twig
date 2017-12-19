@@ -14,3 +14,24 @@
     <img src="http://via.placeholder.com/{{ options }}"/>
 {% endmacro placeholder %}
 
+{% macro debugpopup(title,content,options) %}
+    {% set popupid = 'debugpopup'~random() %}
+    <div class="reveal large" id="{{ popupid }}" data-reveal>
+        {% if title is defined %}
+            <h2>{{ title }} </h2>
+        {% endif %}
+        {% if options.lead is defined %}
+            <p class="lead">{{ options.lead }}</p>
+        {% endif %}
+        {% if options.title is defined %}
+        {% endif %}
+        {% if content is defined %}
+            {{ dump(content) }}
+        {% endif %}
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <button class="button" data-open="{{ popupid }}">{{ title }}</button>
+
+{% endmacro %}

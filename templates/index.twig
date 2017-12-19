@@ -1,0 +1,14 @@
+{% extends '/_master.twig' %}
+{% block body %}
+
+    {% embed 'includes/_main_xgrid.twig' %}
+        {% block main %} 
+            {{ parent() }}
+
+        {% endblock main %}
+
+        {% block aside %}         
+            {{ parent() }}
+        {% endblock aside %}
+    {% endembed %}
+{% endblock body%}
