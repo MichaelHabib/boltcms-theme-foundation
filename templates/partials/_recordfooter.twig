@@ -2,14 +2,14 @@
     <div>
         {% if record.editlink() %}
             <p><a href="{{ record.editlink() }}">Edit this entry</a></p>
-        {% endif %}
 
-        <p>
-            {{ __('general.phrase.written-by-on', {
+            <p>
+                {{ __('general.phrase.written-by-on', {
         '%name%': record.user.displayname|default(__('Unknown')),
         '%date%': record.datepublish|localedatetime("%A %B %e, %Y")
     }) }}
-        </p>
+            </p>
+        {% endif %}
 
         {% if extended|default() %}
             <p>{% include '_sub_taxonomylinks.twig' with {'record': record} %}</p>

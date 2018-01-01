@@ -48,9 +48,7 @@ Main section with right aside
                             {% if record.title is defined %}
                             {% endif %}
 
-                            {% set fieldsss = fields(record=record, template='includes/_sub_fields.twig') %}
-                            {#                            {{ fieldsss|raw }}#}
-                            {% include 'includes/_record_footer.twig' with {'record': record} %}
+                            {% include 'partials/_recordfooter.twig' with {'record': record} %}
                         </article>
 
                     {% elseif records is defined %}

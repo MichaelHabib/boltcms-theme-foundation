@@ -32,7 +32,7 @@
                     {{ record.content |raw}}
                 </section>
             {% endif %}
-            
+
             {% if record.imagelist is defined %}
                 <section class='grid-container gallery '>
                     {% from 'includes/galleries/_gallery_simple.twig' import gallery as gallery %}
@@ -45,16 +45,22 @@
                     {{ gallery(record.imagelist,galleryoptions) }}
                 </section>
             {% endif %}
-            
-            {% set fieldsss = fields(record=record, template='includes/_sub_fields.twig') %}
-            {% include 'includes/_record_footer.twig' with {'record': record} %}
+
+            {% set fieldsss = fields(record=record, template='partials/_sub_fields.twig') %}
+            {% include 'partials/_recordfooter.twig' with {'record': record} %}
 
 
             {% if record.contentblocks is defined %}
                 {% include 'includes/_blocks_templates.twig' with {'record': record} %}
             {% endif %}
 
-
+            <div class="grid-container">
+                {% setcontent entries = "pages/latest/2" allowpaging %}
+                {% for entry in entries %}
+                    <span>{{ entry.title }}</span>
+                {% endfor %}
+                {{ pager('',3,'includes/pagination/_pagination.twig') }}
+            </div>
         {% endblock main %}
 
         {% block aside %}         
